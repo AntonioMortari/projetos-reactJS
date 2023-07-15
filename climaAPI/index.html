@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/estilos/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script type="module" src="src/scripts/script.js" defer></script>
+    <title>Clima</title>
+</head>
+<body>
+
+    <div class="conteiner">
+        <div class="form">
+            <h1>Confira o clima de uma cidade:</h1>
+            <div class="form-input-conteiner">
+                <input type="text" name="cidade" id="cidade-input" placeholder="Digite o nome da cidade">
+                <button id="buscar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div id="msg-erro"></div>
+        <div id="weather-data">
+            <h2>
+                <i class="fa-solid fa-location-dot"></i>
+                <span id="cidade"></span>
+                <img src="" id="pais" alt="bandeira do país">
+            </h2>
+            <p id="temperatura"><span id="numero-temperatura"></span></p>
+            <div id="conteiner-descricao">
+                <p id="descricao"></p>
+                <img src="" id="weather-icon" alt="Condições do tempo">
+            </div>
+            <div id="conteiner-detalhes">
+                <p id="umidade">
+                    <i class="fa-solid fa-droplet"></i>
+                    <span>48%</span>
+                </p>
+                <p id="vento">
+                    <i class="fa-solid fa-wind"></i>
+                    <span>10km/h</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="src/scripts/chave.js"></script>
+
+</body>
+</html>

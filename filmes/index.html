@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Filmes</title>
+</head>
+<body>
+
+    <header id="cabecalho">
+        <h1>Moo<span>Flix</span></h1>
+
+        <nav id="nav">
+            <a href="https://antoniomortari.github.io/aulas_senac/projetos/listaDeTarefas/" class="link" target="_blank">Lista de tarefas</a>
+            <a href="https://antoniomortari.github.io/aulas_senac/projetos/page-xmen/" class="link" target="_blank">Projeto Xmen</a>
+            <a href="https://antoniomortari.github.io/aulas_senac/projetos/projeto_doctor_care/" class="link" target="_blank">Projeto DoctorCare</a>
+            <a href="https://github.com/AntonioMortari" class="link" target="_blank">Github</a>
+        </nav>
+
+        <i class="fa-solid fa-bars" id="btn-menu"></i>
+    </header>
+
+    <main>
+        <div id="conteiner-pesquisa">
+            <label for="input-pesquisa">
+                <input type="text" id="input-pesquisa" name="input-pesquisa" placeholder="Procure por um filme">
+                <i class="fa-solid fa-magnifying-glass" id="btn-procurar"></i>
+            </label>
+
+            <div id="opcoes">
+                <button id="series-populares">
+                    Séries Populares
+                </button>
+
+                <button id="filmes-populares">
+                    Filmes Populares
+                </button>
+
+                <button id="filmes-curtidos">
+                    Marcados como gostei
+                </button>
+
+                <button id="melhor-avaliados">
+                    Melhor avaliados
+                </button>
+            </div>
+        </div>
+
+        <div id="mostrar-resultados">
+            Resultados da pesquisa: <span id="numero-resultados">3</span>
+        </div>
+
+        <ul id="conteiner-filmes">
+            <!-- Os filmes aparecerão aqui -->
+        </ul>
+    </main>
+
+    <footer>
+        <p>By @<a href="https://www.github.com/antoniomortari" target="_blank">Antonio Mortari</a></p>
+        <button id="voltar-inicio">
+            <a href="#conteiner-pesquisa"><i class="fa-solid fa-chevron-up"></i></a>
+        </button>
+    </footer>
+    
+</body>
+</html>

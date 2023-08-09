@@ -3,12 +3,10 @@
 let urlFilmesPopulares = 'https://api.themoviedb.org/3/trending/movie/day?language=PT-BR'
 let urlSeriesPopulares = 'https://api.themoviedb.org/3/trending/tv/week?language=PT-BR'
 let urlMaisVotados = 'https://api.themoviedb.org/3/movie/top_rated?language=pt-br&page=1'
-// let urlProcurar = 'https://api.themoviedb.org/3/search/multi?query=barbie&language=PT-BR&page=1'
 let urlImagens = 'https://image.tmdb.org/t/p/w500'
 let conteinerFilmes = document.querySelector('#conteiner-filmes')
 let inputPesquisa = document.querySelector('#input-pesquisa')
 let itensLocalStorage = JSON.parse(localStorage.getItem('itens')) || []
-
 
 //autorização
 const options = {
@@ -33,7 +31,6 @@ const toggleMenu = () =>{
 
 btnMenu.addEventListener('click', toggleMenu)
 
-
 //FUNÇÕES
 
 const requisicaoPadrao = async() =>{
@@ -49,7 +46,6 @@ const requisicaoPadrao = async() =>{
 }
 
 const criarFilmes = (dadosFilme) =>{
-    console.log(dadosFilme)
     dadosFilme.forEach(infoFilme =>{
         let filme = document.createElement('li')
         filme.classList.add('filme')
@@ -64,17 +60,23 @@ const mostrarFilmesCriado = (filme,infoFilme) =>{
     }
     conteinerFilmes.appendChild(filme)
 
-    //verificando se é serie ou filme e pegando os valores
+    //verificando se é serie ou filme e pegando as informações
     let data = infoFilme.first_air_date || infoFilme.release_date
     let nome = infoFilme.title || infoFilme.name
     let src = urlImagens + infoFilme.poster_path
     if(!src){
+        //se não tiver imagem
         return
     }
+
+    //formatando data
     data = data.split('-').reverse('-')
     data = data[2]
 
     filme.innerHTML = `
+    <div class="descricao">
+                    <p>${infoFilme.overview}</p>
+                </div>
     <div class="imagem">
     <img src="${src}" alt="Cartaz de ${nome}">
 </div>
@@ -91,6 +93,7 @@ const mostrarFilmesCriado = (filme,infoFilme) =>{
     let btn = filme.querySelector('.curtir')
     itensLocalStorage.forEach(item =>{
         if(item.nome == nome){
+            //se o filme estiver no localstorage carregue-o como favorito
             btn.classList.remove('fa-regular')
             btn.classList.add('fa-solid') 
         }
@@ -151,6 +154,7 @@ const filmesPopulares = async() =>{
 
     let resposta = await fetch(urlFilmesPopulares, options)
     let dados = await resposta.json()
+    console.log(dados)
     let dadosFilme = dados.results
 
     criarFilmes(dadosFilme)
@@ -200,7 +204,8 @@ const pegarDadosItemCurtido = (btn) =>{
         src: itemCurtido.querySelector('.imagem img').src,
         nome: itemCurtido.querySelector('.nome-filme').textContent,
         avaliacao: itemCurtido.querySelector('.avaliacao').textContent,
-        data: itemCurtido.querySelector('.data').textContent
+        data: itemCurtido.querySelector('.data').textContent,
+        overview: itemCurtido.querySelector('.descricao').textContent
     }
 
     return dadosFilmeCurtido
@@ -214,9 +219,12 @@ const carregarItensCurtidos = () =>{
         filme.classList.add('filme')
     
         filme.innerHTML = `
+        <div class="descricao">
+            ${item.overview}
+        </div>     
         <div class="imagem">
         <img src="${item.src}" alt="Cartaz de ${item.nome}">
-    </div>
+        </div>
     <div class="info">
         <p><span class="nome-filme">${item.nome}</span> (<span class = "data">${item.data}</span>)</p>
         <div class="icones">
@@ -236,7 +244,7 @@ const carregarItensCurtidos = () =>{
 
         btn.addEventListener('click', (btn) =>{
             removerItemLocalStorage(btn.target)
-            let filme = btn.target.parentNode.parentNode.parentNode.parentNode
+            let filme = btn.target.parentNode.parentNode.parentNode.parentNode.parentNode
             filme.remove()
         })
     })
@@ -259,5 +267,3 @@ document.querySelector('#melhor-avaliados').addEventListener('click', requisicao
 document.querySelector('#series-populares').addEventListener('click', seriesPopulares)
 document.querySelector('#filmes-populares').addEventListener('click', filmesPopulares)
 document.querySelector('#filmes-curtidos').addEventListener('click', carregarItensCurtidos)
-
-

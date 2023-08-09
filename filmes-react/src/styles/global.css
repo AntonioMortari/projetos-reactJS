@@ -1,0 +1,21 @@
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    background-color: #535353;
+    color: #F2ECFF;
+}
+
+button, button > svg{
+    cursor: pointer;
+}
+
+a{
+    text-decoration: none;
+}

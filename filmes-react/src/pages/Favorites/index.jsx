@@ -1,5 +1,5 @@
 import { useEffect,useState } from 'react';
-import data from '../../../db.json'
+
 import key from '../../api/key'
 
 import CardMovie from '../../components/CardMovie';
@@ -8,7 +8,6 @@ import Msg from '../../components/Msg'
 
 
 function Favorites() {
-    let datas= []
     const [dataMovies, setDataMovies] = useState([])
 
     const [favorites, setFavorites] = useState(JSON.parse(localStorage.getItem('favorites')) || [] )
@@ -18,14 +17,13 @@ function Favorites() {
         let data = await resp.json()
 
         setDataMovies(prevDataMovies => [...prevDataMovies, data])
-
-        
     }
 
     useEffect(() =>{
         if(favorites.length > 0){
-            favorites.forEach(idFavorite =>{
+            favorites.forEach((idFavorite, index) =>{
                 getDataMovie(idFavorite)
+                console.log(index)
             })
         }
     },[])

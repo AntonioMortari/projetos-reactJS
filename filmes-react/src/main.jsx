@@ -22,7 +22,6 @@ import Favorites from './pages/Favorites'
 import './styles/global.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
     <ThemeProvider theme={theme}>
 
     <Router>
@@ -39,5 +38,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </Router>
 
     </ThemeProvider>
-  </React.StrictMode>,
 )

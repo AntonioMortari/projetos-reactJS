@@ -1,15 +1,6 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { FaStar, FaRegHeart, FaHeart, FaTrash } from 'react-icons/fa'
-
-import dataFavorites from '../../../db.json'
-let idFavorites = dataFavorites.favorites
-let arrayIds = idFavorites.map(obj => {
-    return (
-        obj.id
-    )
-})
-
+import { FaStar, FaRegHeart, FaHeart} from 'react-icons/fa'
 
 import { Link } from 'react-router-dom'
 
@@ -104,12 +95,10 @@ function CardMovie({ data }) {
     const [favorites, setFavorites] = useState(JSON.parse(localStorage.getItem('favorites')) || [] )
 
     const addFavorites = (id) => {
-        if (!favorites.includes(id)) {
-            const newFavorites = [...favorites, id];
-            setFavorites(newFavorites);
-            localStorage.setItem('favorites', JSON.stringify(newFavorites));
-        }
-    };
+            let newFavorites = [...favorites, id]
+            setFavorites(newFavorites)
+            localStorage.setItem('favorites', JSON.stringify(newFavorites))
+    }
 
     const removeFavorites = (id) =>{
         const indexToRemove = favorites.indexOf(id)

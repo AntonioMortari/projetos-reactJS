@@ -25,7 +25,7 @@ function Home() {
     useEffect(() => {
         // pega os dados do db uma vez
         getDataTasks()
-    },[])
+    },[dataTasks])
 
     return (
         <Main>

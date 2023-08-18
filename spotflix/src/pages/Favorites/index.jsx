@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { useEffect,useState } from 'react';
 
 import key from '../../api/key'
@@ -20,12 +21,19 @@ function Favorites() {
     }
 
     useEffect(() =>{
-        if(favorites.length > 0){
-            favorites.forEach((idFavorite, index) =>{
-                getDataMovie(idFavorite)
-                console.log(index)
+        let newFavorites;
+        axios.get('http://localhost:3000/favorites')
+            .then(response => {
+                newFavorites = [...response.data]
+                setFavorites(newFavorites)
+
+                newFavorites.map(obj => {
+                    getDataMovie(obj.id)
+                })
+                
             })
-        }
+            .catch(err => console.log(err))
+           
     },[])
 
     

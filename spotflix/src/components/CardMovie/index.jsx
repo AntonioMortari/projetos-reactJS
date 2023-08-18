@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { FaStar, FaRegHeart, FaHeart} from 'react-icons/fa'
@@ -92,26 +93,24 @@ const Card = styled.div`
 
 
 function CardMovie({ data }) {
-    const [favorites, setFavorites] = useState(JSON.parse(localStorage.getItem('favorites')) || [] )
+    const [favorites, setFavorites] = useState([])
+    
+    useEffect(() =>{
+        axios.get('http://localhost:3000/favorites')
+            .then(response => setFavorites(response.data))
+            .catch(err => console.log(err)) 
+    },[favorites])
 
     const addFavorites = (id) => {
-            let newFavorites = [...favorites, id]
-            setFavorites(newFavorites)
-            localStorage.setItem('favorites', JSON.stringify(newFavorites))
+            axios.post('http://localhost:3000/favorites', {id:id})
+                .then(response => console.log(response))
+                .catch(err => console.log(err))
     }
 
     const removeFavorites = (id) =>{
-        const indexToRemove = favorites.indexOf(id)
-
-        if (indexToRemove !== -1) {
-            //se encontrar
-            const newFavorites = [...favorites]
-            newFavorites.splice(indexToRemove, 1)
-    
-            setFavorites(newFavorites)
-            localStorage.setItem('favorites', JSON.stringify(newFavorites))
-        }
-        
+        axios.delete(`http://localhost:3000/favorites/${id}`)
+            .then(response => console.log(response))
+            .catch(err => console.log(err))
     }
 
     const imageUrl = 'https://image.tmdb.org/t/p/w500'
@@ -138,8 +137,10 @@ function CardMovie({ data }) {
                         Detalhes
                     </Link>
 
+                    {console.log(favorites.some(item => item.id === data.id))}
 
-                    {favorites.includes(data.id) ? (
+
+                    {favorites.some(item => item.id === data.id) ? (
                         <FaHeart onClick={() =>{
                             removeFavorites(data.id)
                         }} />

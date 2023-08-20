@@ -29,9 +29,15 @@ const ConteinerDetails = styled.div`
         overflow-x: auto;
     }
 
-    >.arrow-left > svg{
-        transform: scale(1.2);
+    >.arrow-left{
+        background-color: transparent;
+        border: none;
+        display: flex;
+        justify-content: start;
+
+        > svg{
         color:${({theme}) => theme.COLORS.primary_color};
+        }
     }
 
     >img{
@@ -102,9 +108,11 @@ function Details() {
         <ConteinerDetails>
             {dataMovie ? (
                 <>
-                    <Link className="arrow-left" to="/">
-                        <FaArrowLeft />
-                    </Link>
+
+                        <button className="arrow-left" onClick={() => window.history.back()}>
+                            <FaArrowLeft size={20} />
+                        </button>
+
                     {dataMovie.backdrop_path &&
                       <img src={`${imageUrl}${dataMovie.backdrop_path}`} alt={`Cartaz do ${dataMovie.title}`} />
                     }

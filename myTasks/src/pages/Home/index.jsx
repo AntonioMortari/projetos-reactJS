@@ -15,7 +15,7 @@ function Home() {
     const [dataTasks, setDataTasks] = useState([])
 
     const getDataTasks = async() =>{
-        let resp = await fetch('http://localhost:3000/tasks')
+        let resp = await fetch('http://localhost:3000/tasks?_sort=isCompleted&_order=asc')
         let data = await resp.json()
 
         // atualiza a variável dataTasks com os dados do db

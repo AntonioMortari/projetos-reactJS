@@ -1,0 +1,16 @@
+{
+    "users":[
+        {
+            "id":1,
+            "name":"Antonio Mortari",
+            "email":"antoniomortari09@gmail.com",
+            "password":"30030522"
+        },
+        {
+            "id":1,
+            "name":"Antonio Mortari",
+            "email":"hhhhh",
+            "password":"30030522"
+        }
+    ]
+}

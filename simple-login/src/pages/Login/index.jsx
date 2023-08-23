@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import fetchData from '../../axios/config'
 
 import { Link } from 'react-router-dom';
-import Conteiner from './styles'
+import Conteiner from '../../components/Main'
 
 import {
     Button,
@@ -13,27 +16,44 @@ import {
     Input,
 } from '@chakra-ui/react'
 
+import ErrorMessage from '../../components/ErrorMessage';
 
 
 const initialStates = {
-    email:'',
-    password:''
+    email: '',
+    password: ''
 }
 
 function Login() {
     const [values, setValues] = useState(initialStates)
     const [dataUser, setDataUser] = useState([])
+    // estados de erro
+    const [isError, setIsError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
+
+    const isLogged = useSelector(state => state.isLogged)
 
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
-    const verifyUser = async(e) =>{
+    const showError = (message) =>{
+        setIsError(true)
+        setErrorMessage(message)
+    }
+
+    const verifyUser = async (e) => {
         e.preventDefault()
         let newDataUser;
+
+        if (values.email.length == '' || values.password.length == '') {
+            showError('Preencha os campos corretamente!')
+            return
+        }
 
         const url = `/users?email=${values.email}`
 
         await fetchData.get(url)
-        // aqui fazemos uma requisição a api fake para ver se o usuário existe
+            // aqui fazemos uma requisição a api fake para ver se o usuário existe
             .then(response => {
                 setDataUser(response.data)
                 newDataUser = [...response.data]
@@ -42,34 +62,43 @@ function Login() {
             })
             .catch(err => console.log(err))
 
-        if(newDataUser){
+        if (newDataUser) {
             // se o usuário existe, ou seja, o email está correto
-            if(newDataUser.password == values.password && newDataUser.email == values.email){
+            if (newDataUser.password == values.password && newDataUser.email == values.email) {
                 // verificamos se a senha está correta, se estiver direciona ao profile
+                dispatch({type:'LOGIN'})
                 navigate('/profile')
-            }else{
-                // se não, exibe um alerta que a senha esta incorrete
-                alert('Senha incorreta!')
+            } else {
+                // se não, exibe um alerta que a senha esta incorreta
+                showError('Senha incorreta!')
             }
 
-        }else{
+        } else {
             // caso o email não exista, exiba um alerta
-            alert('Usuário não encontrado!')
+            showError('Usuário não encontrado')
         }
     }
 
-    const onChange = (e) =>{
-        const {name,value} = e.target
+    const onChange = (e) => {
+        setIsError(false)
+        setErrorMessage('')
 
-        let newState = {...values}
+        const { name, value } = e.target
+
+        let newState = { ...values }
 
         newState[name] = value
 
         setValues(newState)
     }
-    
+
+    useEffect(() =>{
+        isLogged && navigate('/profile')
+    },[])
+
 
     return (
+    <>
         <Conteiner>
             <h1>Login</h1>
             <p>Bem-vindo(a) novamente!, Faça login para continuar.</p>
@@ -79,31 +108,43 @@ function Login() {
                 <FormLabel mt='30px'>
                     Email
                     <Input name='email' type='email' w='95%' variant='flushed' placeholder='Digite seu email' focusBorderColor='primary' size='md'
-                    // eventos
-                    onChange={onChange}
-                    onKeyDown={(e) => e.key == 'Enter' && verifyUser(e) }
+                        // eventos
+                        onChange={onChange}
+                        onKeyDown={(e) => e.key == 'Enter' && verifyUser(e)}
                     />
+
+
+
+
                 </FormLabel>
 
                 <FormLabel>
                     Senha
 
                     <Input name='password' type='password' w='95%' variant='flushed' placeholder='Digite sua senha' focusBorderColor='primary' size='md'
-                    // eventos
-                    onChange={onChange}
-                    onKeyDown={(e) => e.key == 'Enter' && verifyUser(e)}
+                        // eventos
+                        onChange={onChange}
+                        onKeyDown={(e) => e.key == 'Enter' && verifyUser(e)}
                     />
                 </FormLabel>
 
                 <Button w='40%' colorScheme='messenger' bg='primary' color='bgmain' mt='30px'
-                onClick={verifyUser}
+                    onClick={verifyUser}
                 >
                     Entrar
                 </Button>
+
+                
+                {isError && (
+                    <ErrorMessage message={errorMessage} />
+                )}
+
+
             </FormControl>
 
             <p>Não tem uma conta? <Link to='/sign-up'>Cadastre-se</Link></p>
         </Conteiner>
+    </>
     );
 }
 

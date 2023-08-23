@@ -1,16 +1,27 @@
 {
-    "users":[
-        {
-            "id":1,
-            "name":"Antonio Mortari",
-            "email":"antoniomortari09@gmail.com",
-            "password":"30030522"
-        },
-        {
-            "id":1,
-            "name":"Antonio Mortari",
-            "email":"hhhhh",
-            "password":"30030522"
-        }
-    ]
+  "users": [
+    {
+      "id": 1,
+      "name": "Antonio",
+      "lastName": "Mortari",
+      "email": "antoniomortari09@gmail.com",
+      "password": "30030522"
+    },
+    {
+      "name": "Eliane",
+      "lastName": "Mortari",
+      "email": "elianemortari@hotmail.com",
+      "password": "30030522",
+      "password2": "30030522",
+      "id": 2
+    },
+    {
+      "name": "Eliane",
+      "lastName": "Mortari",
+      "email": "elianemortari@hotmail.com",
+      "password": "30030522",
+      "password2": "30030522",
+      "id": 3
+    }
+  ]
 }

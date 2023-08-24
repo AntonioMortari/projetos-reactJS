@@ -6,11 +6,16 @@ const Conteiner = styled.main`
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0px 0px 12px #26262665;
-    margin: 0 20px;
+    margin: 40px 40px;
 
     >h1{
         color: ${({theme}) => theme.colors.primary};
         font-weight: normal;
+    }
+
+    .eye{
+        color: ${({theme}) => theme.colors.primary};
+        cursor:pointer;
     }
 
     a{

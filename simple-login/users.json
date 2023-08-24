@@ -16,12 +16,20 @@
       "id": 2
     },
     {
-      "name": "Eliane",
-      "lastName": "Mortari",
-      "email": "elianemortari@hotmail.com",
+      "name": "Carlos",
+      "lastName": "Eduardo",
+      "email": "postanofoto@gmail.com",
       "password": "30030522",
       "password2": "30030522",
       "id": 3
+    },
+    {
+      "name": "Maria",
+      "lastName": "Júlia",
+      "email": "maju2018@gmail.com",
+      "password": "30030522",
+      "password2": "30030522",
+      "id": 4
     }
   ]
 }

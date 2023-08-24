@@ -11,8 +11,8 @@ function Root() {
         <Router>
             <Routes>
                 <Route path='/' element={<Login />} />
-                <Route path='sign-up' element={<SignUp />} />
-                <Route path='profile' element={<Profile />} />
+                <Route path='/sign-up' element={<SignUp />} />
+                <Route path='/profile/:id' element={<Profile />} />
             </Routes>
         </Router>
      );

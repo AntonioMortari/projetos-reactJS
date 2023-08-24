@@ -17,6 +17,7 @@ import {
 } from '@chakra-ui/react'
 
 import ErrorMessage from '../../components/ErrorMessage';
+import InputPassword from '../../components/InputPassword';
 
 
 const initialStates = {
@@ -67,7 +68,8 @@ function Login() {
             if (newDataUser.password == values.password && newDataUser.email == values.email) {
                 // verificamos se a senha está correta, se estiver direciona ao profile
                 dispatch({type:'LOGIN'})
-                navigate('/profile')
+                localStorage.setItem('user', JSON.stringify(newDataUser.id))
+                navigate(`/profile/${newDataUser.id}`)
             } else {
                 // se não, exibe um alerta que a senha esta incorreta
                 showError('Senha incorreta!')
@@ -93,7 +95,8 @@ function Login() {
     }
 
     useEffect(() =>{
-        isLogged && navigate('/profile')
+        const idUser = JSON.parse(localStorage.getItem('user'))
+        isLogged && navigate(`/profile/${idUser}`)
     },[])
 
 
@@ -112,21 +115,9 @@ function Login() {
                         onChange={onChange}
                         onKeyDown={(e) => e.key == 'Enter' && verifyUser(e)}
                     />
-
-
-
-
                 </FormLabel>
 
-                <FormLabel>
-                    Senha
-
-                    <Input name='password' type='password' w='95%' variant='flushed' placeholder='Digite sua senha' focusBorderColor='primary' size='md'
-                        // eventos
-                        onChange={onChange}
-                        onKeyDown={(e) => e.key == 'Enter' && verifyUser(e)}
-                    />
-                </FormLabel>
+                <InputPassword w='95%' placeholder='Digite sua senha' name='password' size='md' onChange={onChange} onKeyDown={(e) => e.key == 'Enter' && verifyUser(e)} variant='flushed' />
 
                 <Button w='40%' colorScheme='messenger' bg='primary' color='bgmain' mt='30px'
                     onClick={verifyUser}

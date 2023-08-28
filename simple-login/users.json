@@ -1,35 +1,12 @@
 {
   "users": [
     {
-      "id": 1,
       "name": "Antonio",
-      "lastName": "Mortari",
+      "lastName": "Marcos Mortari Pessoa",
       "email": "antoniomortari09@gmail.com",
-      "password": "30030522"
-    },
-    {
-      "name": "Eliane",
-      "lastName": "Mortari",
-      "email": "elianemortari@hotmail.com",
-      "password": "30030522",
+      "password": "30032005",
       "password2": "30030522",
-      "id": 2
-    },
-    {
-      "name": "Carlos",
-      "lastName": "Eduardo",
-      "email": "postanofoto@gmail.com",
-      "password": "30030522",
-      "password2": "30030522",
-      "id": 3
-    },
-    {
-      "name": "Maria",
-      "lastName": "Júlia",
-      "email": "maju2018@gmail.com",
-      "password": "30030522",
-      "password2": "30030522",
-      "id": 4
+      "id": 1
     }
   ]
 }
